@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: billing
+spec:
+	replicas: 3
+	selector:
+		matchLabels:
+			app: billing
+		template:
+			metadata:
+				labels:
+					app: billing
+			spec:
+				containers:
+				- name: orders
+					image: voloxatyj/ordering-app_billing
+					env:
+						-	name: RABBIT_MQ_BILLING_QUEUE
+							value: auth
+						-	name: RABBIT_MQ_AUTH_QUEU
+							value: auth
